@@ -9,9 +9,17 @@ services:
       - key: PORT
         value: 10000
       - key: DATABASE_URL
-        sync: false
+        fromDatabase:
+          name: nixty-db
+          property: connectionString
       - key: JWT_SECRET
         generateValue: true
       - key: ENCRYPTION_KEY
         generateValue: true
     autoDeploy: false
+
+databases:
+  - name: nixty-db
+    plan: free
+    databaseName: nixty
+    user: nixty_user
