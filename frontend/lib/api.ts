@@ -1,10 +1,12 @@
 const getBaseUrl = () => {
+    // For Vercel deployment, use relative paths
+    // Both frontend and backend are on the same domain
     if (typeof window === 'undefined') {
-        // Server-side
-        return process.env.INTERNAL_API_URL || 'http://backend:3001';
+        // Server-side: use environment variable or relative path
+        return process.env.INTERNAL_API_URL || '';
     }
-    // Client-side
-    return process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+    // Client-side: use relative path (works on Vercel)
+    return process.env.NEXT_PUBLIC_API_URL || '';
 };
 
 const API_URL = getBaseUrl();
